@@ -1,0 +1,33 @@
+{% extends "govuk/template.njk" %}
+
+{% block head %}
+  <!--[if !IE 8]><!-->
+    <!-- Link to custom stylesheet for modern browsers -->
+    <link href="stylesheets/style.css" rel="stylesheet">
+  <!--<![endif]-->
+{% endblock %}
+
+{% block content %}
+  <!-- Title for the address lookup section -->
+  <h1 class="govuk-heading-xl">Address lookup</h1>
+  <div class="govuk-form-group">
+    <!-- Start of form for entering postcode -->
+    <form method="post" action="/addresses" enctype="application/x-www-form-urlencoded">
+      <!-- Label for the postcode input -->
+      <label class="govuk-label" for="postcode">
+        Enter a postcode
+      </label>
+      <!-- Input field for entering postcode -->
+      <input class="govuk-input govuk-input--width-10" id="postcode" name="postcode" type="text">
+    </div> <!-- Close div for form-group -->
+    <!-- Button to submit postcode form -->
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      Find address
+    </button>
+    </form> <!-- Close form -->
+{% endblock %}
+
+{% block bodyEnd %}
+  <!-- Include custom JavaScript file at the end of the body -->
+  <script src="javascripts/javascript.js"></script>
+{% endblock %}

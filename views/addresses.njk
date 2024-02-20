@@ -1,0 +1,33 @@
+{% extends "govuk/template.njk" %}
+
+{% block head %}
+  <!--[if !IE 8]><!-->
+    <!-- Link to custom stylesheet for modern browsers -->
+    <link href="stylesheets/style.css" rel="stylesheet">
+  <!--<![endif]-->
+{% endblock %}
+
+{% block content %}
+  <!-- Title for the address lookup section -->
+  <h1 class="govuk-heading-xl">Address lookup</h1>
+  <div class="govuk-form-group">
+    <!-- Label for the address selection -->
+    <label class="govuk-label" for="subject">
+      Choose an address
+    </label>
+    <!-- Dropdown menu for selecting an address -->
+    <select class="govuk-select" id="subject" name="subject" aria-describedby="subject-hint">
+      <!-- Default option for choosing an address -->
+      <option value="choose" selected>Choose address</option>
+      <!-- Loop through addresses and populate the dropdown options -->
+      {% for address in addresses %}
+        <option value="{{ address }}">{{ address }}</option>
+      {% endfor %}
+    </select>
+  </div>
+{% endblock %}
+
+{% block bodyEnd %}
+  <!-- Include custom JavaScript file at the end of the body -->
+  <script src="javascripts/javascript.js"></script>
+{% endblock %}
