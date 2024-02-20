@@ -1,3 +1,4 @@
+// Importing required modules
 const express = require('express');
 const router = express.Router();
 
@@ -5,6 +6,7 @@ const router = express.Router();
 const API_KEY = 'Xi0Px2KXSPHlwu1AD6FLR8kWJMgAoQQu';
 const API_URL = 'https://api.os.uk/search/names/v1/find';
 
+// Custom Error class for handling errors
 class CustomError extends Error {
     constructor(message, status) {
         super(message);
@@ -12,10 +14,12 @@ class CustomError extends Error {
     }
 }
 
+// Function to render error page
 const renderError = (res, message) => {
     res.status(500).render('../views/index.njk', { error: message });
 }
 
+// Route for handling POST requests
 router.post('/', async function(req, res, next){
     const postcode = req.body.postcode;
     if (!postcode) {
@@ -33,6 +37,7 @@ router.post('/', async function(req, res, next){
             return next(new CustomError('Invalid postcode', 500));
         }
         
+        // Extract relevant information from API response
         const addresses = data.results.map(result => {
             const { GAZETTEER_ENTRY } = result;
             let postcodeDistrict = '';
@@ -58,6 +63,7 @@ router.use((err, req, res, next) => {
         return next(err);
     }
     console.log(err.message);
+    // Handle custom errors and other errors separately
     if (err instanceof CustomError) {
         renderError(res, err.message);
     } else {
